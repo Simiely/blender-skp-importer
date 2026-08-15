@@ -74,7 +74,7 @@ blender-skp-importer/
 | 手动调整过的贴图（SKP） | SketchUp 里用「纹理 → 位置」手动移动/旋转过的贴图，导入后位置可能对不上（插件仅处理缩放比例） |
 | 透明贴图 | 依赖贴图 Alpha 的透明（如镂空栏杆），导入后需手动将贴图 Alpha 接到材质 |
 | `.max` 贴图路径 | 只认"链接纹理"，贴图必须与 .max 同目录或子目录，否则变紫 |
-| `.max` 灯光/代理 | VRayLight 灯光对象、VRayProxy 代理网格不会导入，需重打灯/转真实网格 |
+| `.max` 灯光/代理 | VRayLight 灯光对象不会导入,需重打灯;VRayProxy 代理网格(`.vrmesh`)会丢,需先在 3ds Max 里转成真实网格(Convert to Editable Poly)再导入,排查与解决见 [DEVELOPMENT.md](DEVELOPMENT.md) |
 | `.max` 版本 | 需 3ds Max 2015+ 保存；压缩格式仅支持 .zip 且 Max ≤2023 |
 
 ## 文档索引
