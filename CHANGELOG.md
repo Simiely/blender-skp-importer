@@ -1,5 +1,13 @@
 # CHANGELOG.md · 变更记录
 
+## [v1.1.2] - 2026-08-16
+
+### 变更
+- 明确 .max 进 Blender 的**最稳定方案**:Max 转材质(vray-material-replacer)→ 导出 FBX(勾选实例化 + 嵌入媒体)→ Blender 导入 FBX;io_scene_max 直读 .max 降为备选(无 Max 场景)
+- docs/插件结合指南.md 重写第二节:路线总览(两条路)+ 路线 A FBX 详细步骤与注意事项 + 路线 B 直读 .max;第三节表格 MAX 行指向 FBX 路线
+- README 快速开始提示改为最稳定方案(FBX 实例化)
+- DEVELOPMENT.md 新增方案决策记录「FBX(勾选实例化)最稳定」
+
 ## [v1.1.1] - 2026-08-16
 
 ### 新增
