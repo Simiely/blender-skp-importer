@@ -78,6 +78,13 @@ Blender 场景（组件 → 共享网格数据的实例对象，层级保留）
 - 解决：在 3ds Max 里把 VRay 代理**转成真实网格**（右键 → 转换为可编辑多边形/网格，转换会读取 .vrmesh 加载网格）→ 另存/归档 → 重新导入 Blender
 - 预防：导入前在 Max 检查场景是否含代理（`MAXFILES.TXT` 搜 vrmesh）；含代理先转换再走导入流程
 
+### 方案决策:.max 进 Blender 用「FBX(勾选实例化)」最稳定
+
+- 结论：Max 转材质 → 导出 FBX（勾选**实例化 Instancing + 嵌入媒体**）→ Blender 导入 FBX，**优于 io_scene_max 直读 .max**
+- 原因：① 实例关系保留（Blender 导入后为共享网格数据，编辑一个全部同步）② Physical 材质映射 Principled BSDF 更完整 ③ 规避直读限制（VRay 代理丢失、压缩格式、V-Ray 材质部分转换）
+- 适用：本机有 3ds Max 时首选；无 Max（只有别人给的 .max 文件）时走 io_scene_max 直读（指南路线 B）
+- 注意：代理（.vrmesh）导出 FBX 前仍需在 Max 转真实网格；灯光仍不导出
+
 ## 待办 / 已知边界
 
 - [ ] 每面纹理的位置偏移（origin）与旋转：SketchUp「纹理 → 位置」手动调整过的贴图目前无法对齐
