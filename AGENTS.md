@@ -5,8 +5,8 @@
 
 ## 技术栈
 - Blender 5.1.2（`C:\Program Files\Blender Foundation\Blender\`）与 5.2.0 LTS（`C:\Program Files\Blender Foundation\Blender 5.2\`）双安装，均内置 Python 3.13.13
-- 插件 sketchup_importer 0.27.0（RedHaloStudio，仓库 plugins/ 内含 2 个兼容修复），自带 `sketchup.cp313-win_amd64.pyd` 匹配 Python 3.13
-- 扩展 io_scene_max 1.9.2（Blender 官方扩展仓库，.max 导入），仓库 plugins/ 内含本体
+- 插件 sketchup_importer 0.27.0（RedHaloStudio，仓库 `plugins/sketchup_importer.zip` 内含 2 个兼容修复，需解压安装），自带 `sketchup.cp313-win_amd64.pyd` 匹配 Python 3.13
+- 扩展 io_scene_max 1.9.2（Blender 官方扩展仓库，.max 导入），仓库 `plugins/io_scene_max/` 内含本体
 - SketchUp 文件支持到 2026.1.185；.max 需 Max 2015+ 保存
 
 ## 关键坑（务必先读）
