@@ -68,6 +68,16 @@ Blender 场景（组件 → 共享网格数据的实例对象，层级保留）
 - 解决：两个版本的 `%APPDATA%\Blender Foundation\Blender\<v>\scripts\addons\` 都要复制插件
 - 预防：安装插件前先确认本机所有 Blender 版本（`ls "C:\Program Files\Blender Foundation"`）
 
+### 问题：VRay 代理（VRayProxy）模型导入 Blender 后丢失（空物体）
+
+**TL;DR**：`io_scene_max` 不支持 VRay 代理，代理物体（`.vrmesh`）导入后是空 EMPTY 占位，网格内容丢失。
+
+- 问题：用户反馈 `.max` 导入 Blender 后"有模型掉了"；实测 `.blend` 里 561 个 EMPTY 中 63 个无任何子对象、另有 7 个 0 顶点 0 面网格，贴图路径全部完好（排除贴图问题）
+- 根因：场景含 **12 个 VRay 代理文件（`.vrmesh`）**，代理网格数据存在代理文件里（渲染时加载），扩展不加载代理网格，只创建空占位
+- 排查方法（可复现）：① `MAXFILES.TXT`（Max 资源清单）grep `vrmesh` 数代理 ② 打开 .blend 统计 `EMPTY` 与 `MESH_NO_GEO`（0 polygons）③ 核对贴图路径存在性排除贴图丢失
+- 解决：在 3ds Max 里把 VRay 代理**转成真实网格**（右键 → 转换为可编辑多边形/网格，转换会读取 .vrmesh 加载网格）→ 另存/归档 → 重新导入 Blender
+- 预防：导入前在 Max 检查场景是否含代理（`MAXFILES.TXT` 搜 vrmesh）；含代理先转换再走导入流程
+
 ## 待办 / 已知边界
 
 - [ ] 每面纹理的位置偏移（origin）与旋转：SketchUp「纹理 → 位置」手动调整过的贴图目前无法对齐
