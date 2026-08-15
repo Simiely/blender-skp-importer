@@ -1,5 +1,17 @@
 # CHANGELOG.md · 变更记录
 
+## [v1.1.0] - 2026-08-16
+
+### 新增
+- `plugins/` 目录:打包两个插件本体,开箱即用
+  - `plugins/sketchup_importer/`(SKP 导入,含本仓库 2 个 Blender 5.x 兼容修复)
+  - `plugins/io_scene_max/`(.max 导入,Blender 官方扩展 v1.9.2)
+- `docs/插件结合指南.md`:io_scene_max 与 vray-material-replacer 结合,让 .max 导入更稳定;SKP + MAX 双格式统一工作流
+- README 增加 3ds Max(.max)导入快速开始、仓库结构、.max 相关已知限制
+
+### 变更
+- README 从单 SKP 方案扩展为 SKP + MAX 双格式方案
+
 ## [v1.0.0] - 2026-08-15
 
 初始发布，四件套文档就位。
