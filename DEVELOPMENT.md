@@ -84,6 +84,7 @@ Blender 场景（组件 → 共享网格数据的实例对象，层级保留）
 - 原因：① 实例关系保留（Blender 导入后为共享网格数据，编辑一个全部同步）② Physical 材质映射 Principled BSDF 更完整 ③ 规避直读限制（VRay 代理丢失、压缩格式、V-Ray 材质部分转换）
 - 适用：本机有 3ds Max 时首选；无 Max（只有别人给的 .max 文件）时走 io_scene_max 直读（指南路线 B）
 - 注意：代理（.vrmesh）导出 FBX 前仍需在 Max 转真实网格；灯光仍不导出
+- **顺序要点：先烘焙、再转材质**——脚本的 `vrMtlToPhysical` 只把 VRayBitmap/VRayHDRI 转 Bitmap，VRayColor/VRayDirt/falloff 等 VRay 程序贴图原样保留；先烘焙（V-Ray 渲染器下）把它们烘成位图，再转材质迁移才干净，对漏烘有兜底
 
 ## 待办 / 已知边界
 
