@@ -64,7 +64,7 @@ blender-skp-importer/
 - 偏好设置 → 插件（Add-ons）→ 搜索 `Autodesk MAX` → 勾选 `Import-Export: Import Autodesk MAX (.max)`
 - 文件（File）→ 导入（Import）→ Autodesk MAX → 选择 `.max` 文件
 
-> 💡 **最稳定方案(实测)**:在 3ds Max 里用 [vray-material-replacer](https://github.com/Simiely/vray-material-replacer) 转材质(Physical + 烘焙程序贴图)→ **导出 FBX 并勾选「实例化 Instancing + 嵌入媒体」** → Blender 导入 FBX——实例、材质、贴图都能保留。完整流程与备选路线(io_scene_max 直读 .max)见 [docs/插件结合指南.md](docs/插件结合指南.md)。
+> 💡 **最稳定方案(实测)**:在 3ds Max 里用 [vray-material-replacer](https://github.com/Simiely/vray-material-replacer) 处理材质(**顺序:先烘焙程序贴图 → 再转 Physical**,见指南)→ **导出 FBX 并勾选「实例化 Instancing + 嵌入媒体」** → Blender 导入 FBX——实例、材质、贴图都能保留。完整流程与备选路线(io_scene_max 直读 .max)见 [docs/插件结合指南.md](docs/插件结合指南.md)。
 
 ## 已知限制
 
