@@ -1,5 +1,12 @@
 # CHANGELOG.md · 变更记录
 
+## [v1.1.3] - 2026-08-16
+
+### 变更
+- 明确材质处理**顺序:先烘焙程序贴图 → 再转材质**(实测更稳)——脚本的 vrMtlToPhysical 只把 VRayBitmap/VRayHDRI 转 Bitmap,VRayColor/VRayDirt/falloff 等 VRay 程序贴图原样保留;先烘焙(V-Ray 渲染器下)烘成位图后转换迁移干净,漏烘也有兜底
+- docs/插件结合指南.md 路线 A/B 步骤调整为先烘焙再转换,并加「顺序要点」说明
+- README 提示语、DEVELOPMENT 方案决策记录同步补充顺序说明
+
 ## [v1.1.2] - 2026-08-16
 
 ### 变更
