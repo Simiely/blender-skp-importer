@@ -1,6 +1,6 @@
 # AGENTS.md · 项目规则
 
-> 📌 **文档基线**：2026-08-16（commit `343ab3af`）v1.1.0：打包插件 + 双格式方案
+> 📌 **文档基线**：2026-08-16（commit 待推送后回填）v1.1.1：VRay 代理丢失问题记录
 > **更新文档/代码后，请更新此行**（日期 + 新 commit hash），并在 CHANGELOG 追加版本
 
 ## 技术栈
@@ -15,6 +15,7 @@
 - **本机双 Blender**：插件/扩展需同步复制到两个版本的对应目录（addons 与 extensions 各一份）
 - **Blender 4.2+ 扩展不是普通 addon**：安装目录是 `extensions\user_default\`（不是 `user\default`），启用模块名带命名空间前缀 `bl_ext.user_default.io_scene_max`（裸名 `io_scene_max` 会报 No module named）
 - **io_scene_max 只认"链接纹理"**：贴图必须与 .max 同目录/子目录；VRayLight 灯光对象、VRayProxy 代理不会导入
+- **VRay 代理(.vrmesh)导入即空**：io_scene_max 不支持代理网格,导入后是空 EMPTY 占位(实测 12 个 vrmesh → 63 个空物体)。排查:MAXFILES.TXT grep vrmesh;解决:Max 里转真实网格(Convert to Editable Poly)再导入
 - **大场景导入**：数百组件模型内存峰值 10GB+、耗时极长；后台 headless 导入时 mesh 阶段无日志输出，易误判卡死——用 `tasklist | grep blender` 看真实进程，不要用 `tasklist //FI`（Git Bash 转义问题）
 - **下载别拿 Mac 版**：release 里 Mac 资产是 `sketchup.cpython-311-darwin.so` + `SketchUpAPI.framework`，Windows 加载不了
 
