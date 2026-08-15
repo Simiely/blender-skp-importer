@@ -1,6 +1,6 @@
 # AGENTS.md · 项目规则
 
-> 📌 **文档基线**：2026-08-16（commit 待推送后回填）v1.1.2：.max 进 Blender 推荐 FBX(实例化)路线
+> 📌 **文档基线**：2026-08-16（commit `df13c32e`）v1.1.2：.max 进 Blender 推荐 FBX(实例化)路线
 > **更新文档/代码后，请更新此行**（日期 + 新 commit hash），并在 CHANGELOG 追加版本
 
 ## 技术栈
