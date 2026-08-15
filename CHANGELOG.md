@@ -1,5 +1,12 @@
 # CHANGELOG.md · 变更记录
 
+## [v1.1.1] - 2026-08-16
+
+### 新增
+- DEVELOPMENT.md 新增问题记录「VRay 代理(VRayProxy)模型导入丢失」:io_scene_max 不支持 `.vrmesh` 代理网格,导入后是空占位;含排查方法(MAXFILES.TXT grep vrmesh + .blend 统计空物体)与解决(3ds Max 转真实网格后重新导入)
+- README 已知限制表补充 VRayProxy 解决指引
+- docs/插件结合指南.md 补充实测案例(活力之丘点位模型:12 个 .vrmesh → 63 个空占位)
+
 ## [v1.1.0] - 2026-08-16
 
 ### 新增
