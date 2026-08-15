@@ -23,7 +23,7 @@ blender-skp-importer/
 ├── docs/
 │   └── 插件结合指南.md        # 双插件结合使用，让导入更稳定
 └── plugins/                 # 打包好的插件本体（可直接安装）
-    ├── sketchup_importer/   # SKP 导入插件（已含 Blender 5.x 兼容修复）
+    ├── sketchup_importer.zip# SKP 导入插件 zip（解压即得完整插件，已含兼容修复）
     └── io_scene_max/        # .max 导入扩展（官方 v1.9.2）
 ```
 
@@ -31,7 +31,7 @@ blender-skp-importer/
 
 ### 1. 安装插件
 
-本仓库 `plugins/sketchup_importer/` 即完整插件（已含兼容修复），也可从 [RedHaloStudio/Sketchup_Importer](https://github.com/RedHaloStudio/Sketchup_Importer/releases) 下载原版。
+解压本仓库 `plugins/sketchup_importer.zip` 得到 `sketchup_importer` 文件夹（已含兼容修复），也可从 [RedHaloStudio/Sketchup_Importer](https://github.com/RedHaloStudio/Sketchup_Importer/releases) 下载原版。
 
 > ⚠️ 注意：release 页面同时提供 Mac 版，Windows 用户务必认准包含 `sketchup.cpXXX-win_amd64.pyd` 和 `SketchUpAPI.dll` 的包。
 
