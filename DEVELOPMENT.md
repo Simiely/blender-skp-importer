@@ -86,8 +86,21 @@ Blender 场景（组件 → 共享网格数据的实例对象，层级保留）
 - 注意：代理（.vrmesh）导出 FBX 前仍需在 Max 转真实网格；灯光仍不导出
 - **顺序要点：先烘焙、再转材质**——脚本的 `vrMtlToPhysical` 只把 VRayBitmap/VRayHDRI 转 Bitmap，VRayColor/VRayDirt/falloff 等 VRay 程序贴图原样保留；先烘焙（V-Ray 渲染器下）把它们烘成位图，再转材质迁移才干净，对漏烘有兜底
 
+### 问题：中文界面（及任何非英文界面）下 UV 层全部静默丢失
+
+**TL;DR**：插件用英文名 `"Image Texture"` 判断「材质带贴图 → 写 UV」，但节点 name 跟随界面语言本地化，中文界面下叫「图像纹理」→ 判据恒 False → **所有网格一个 UV 都不写，且不报任何错**。
+
+- 问题：中文界面导入后贴图显示为「整图单点采样色」（无 UV ⇒ 贴图坐标退化为常量 (0,0)，整片只采样贴图左下角一点）；依赖贴图 Alpha 的对象整体异常透明（如 partB 的贴图左下角 alpha=0 → 43% 面积全透明）
+- 根因：`write_mesh_data()` 第 593 行 `if "Image Texture" in bmat.node_tree.nodes.keys(): uvs_used = True`。Blender 5.x 节点 name 按界面语言本地化，`nodes.new("ShaderNodeTexImage")` 在 zh_HANS 下 name 为「图像纹理」⇒ 判据恒 False ⇒ `me.uv_layers.new()` 永不执行（上游 0.27.0 master 同款代码）
+- 解决：改按与语言无关的 `bl_idname` 判断：`if bmat.node_tree is not None and any(n.bl_idname == "ShaderNodeTexImage" for n in bmat.node_tree.nodes)`；顺带修掉 `except AttributeError: uvs_used = False` 会把前面材质已置 True 重置回 False 的隐患
+- 排查方法（可复现）：① 会话内实测 `nodes.new('ShaderNodeTexImage').name`（zh_HANS 下为「图像纹理」）② 统计场景材质旧/新判据命中数（实测 0/67 → 41）③ 离线读源 skp 验证 UV 数据存在：`sys.path.insert + os.add_dll_directory(插件目录)` 后 `import sketchup; Model.from_file()`（421MB 约 21s/峰值 4.6GB，须独立进程）
+- 验收指纹：重导后贴图网格的 UV 层名为 `UVMap`（插件用不带名字的 `uv_layers.new()`，默认名不翻译）；实测 24477 网格从 0 层 → 69 个贴图网格全部获得
+- 渲染验证（同一相机/光照隔离渲染，暗背景）：无 UV 像素 std=0.018（纯平色）→ 修复后 0.0718（贴图细节明显）；且「原样 UV」细节(0.0718) > UV÷1000(0.0534) > 归一化(0.0396)，说明导入的是源模型真实纹理映射
+- 预防：插件代码判断节点一律用 `bl_idname`，绝不用 `nodes.keys()` 里的显示名（v1.0.0 修的 KeyError 与此同根：节点名本地化）
+- 已向上游提交修复 PR：https://github.com/RedHaloStudio/Sketchup_Importer/pull/7
+
 ## 待办 / 已知边界
 
 - [ ] 每面纹理的位置偏移（origin）与旋转：SketchUp「纹理 → 位置」手动调整过的贴图目前无法对齐
-- [ ] 贴图 Alpha 自动接透明材质（镂空栏杆等）：当前仅材质颜色带透明时才设 BLEND
+- [x] 贴图 Alpha 透明异常（镂空栏杆等）：根因是中文界面 UV 静默丢失（v1.2.0 修复，见上「UV 层静默丢失」）——插件本身已把 Image Texture.Alpha 接到 Principled（PNG/TARGA），此前缺的是 UV 坐标
 - [ ] 后台 headless 导入大场景稳定性（内存 17GB 级场景耗时极长）

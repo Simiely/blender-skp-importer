@@ -1,5 +1,18 @@
 # CHANGELOG.md · 变更记录
 
+## [v1.2.0] - 2026-09-30
+
+### 修复
+- **中文界面（非英文界面）下 UV 层静默丢失**（上游 bug，zip 内第 3 个兼容修复）：插件按英文名 `"Image Texture"` 判断是否写 UV，而节点名跟随界面语言本地化（中文为「图像纹理」）→ 判据恒 False → 所有网格不写 UV 且无任何报错。改为按 `bl_idname` 判断（与语言无关），zip 内插件已更新
+- 实测验证（Blender 5.2.2 LTS / zh_HANS / 0.27.0）：旧判据命中 0/67 材质 → 新判据 41；重导后 69 个贴图网格全部获得 `UVMap` 层（此前 0/24477）；隔离渲染贴图细节 std 0.018（平色）→ 0.0718
+- 顺带修掉 `except AttributeError: uvs_used = False` 会把前面材质已置 True 重置回 False 的隐患（显式判断 `node_tree is None`）
+- 依赖贴图 Alpha 的透明对象（如 partB，贴图左下角 alpha=0）此前整片全透明——根因正是缺 UV（贴图坐标退化为常量 (0,0) 只采样左下角一点），UV 修复后自动恢复
+- 已向上游提交修复 PR：https://github.com/RedHaloStudio/Sketchup_Importer/pull/7
+
+### 文档
+- DEVELOPMENT.md 新增问题记录「中文界面下 UV 层静默丢失」（含离线读 skp 验证法与验收指纹 `UVMap`）；待办「贴图 Alpha」标记完成
+- README 特性与已知限制同步更新；AGENTS 技术栈更新为 3 个兼容修复、关键坑补充 UV 判据案例
+
 ## [v1.1.3] - 2026-08-16
 
 ### 变更
