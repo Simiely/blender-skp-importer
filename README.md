@@ -1,3 +1,17 @@
+> [!IMPORTANT]
+> ## 📦 本仓库已归档 —— 请到统一插件集下载
+> SketchUp Importer 插件已迁入 **[Simiely/blender-addons](https://github.com/Simiely/blender-addons)**，
+> 后续的版本更新与问题修复都在那边统一维护，**本仓库只读、不再更新**。
+>
+> 最新版下载：https://github.com/Simiely/blender-addons/tree/main/addons
+>
+> ⚠️ 注意：它是**包目录形态**（含 cp37~cp314 多版 `.pyd` 与 `SketchUpAPI.dll`），
+> 安装时需**解压**到 Blender 的 `scripts/addons/`，不能按单文件 `.py` 方式安装。
+> 详细步骤见插件集 README 的「SketchUp Importer」章节。
+>
+> 本仓库的**文档内容仍然有效** —— SketchUp / 3ds Max 导入的兼容修复说明、
+> 纹理与实例处理、常见问题排查仍在这里查阅。
+>
 # blender-skp-importer
 
 > SketchUp（`.skp`）与 3ds Max（`.max`）模型导入 Blender 5.x 的完整方案：插件安装、兼容修复、纹理与实例处理。
