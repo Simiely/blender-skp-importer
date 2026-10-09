@@ -1,7 +1,7 @@
 > [!IMPORTANT]
-> ## 📦 本仓库为历史留档 —— 最新版请到统一插件集获取
+> ## 📦 本仓库已归档（只读）—— 最新版请到统一插件集获取
 > SketchUp Importer 插件已迁入 **[Simiely/blender-addons](https://github.com/Simiely/blender-addons)**，
-> 后续的版本更新与问题修复**只在那边进行**，本仓库**自 2026-10-02 起不再维护**。
+> 后续的版本更新与问题修复**只在那边进行**，本仓库**已于 2026-10-09 归档、只读**。
 >
 > 最新版下载：https://github.com/Simiely/blender-addons/tree/main/addons
 >
